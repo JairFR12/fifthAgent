@@ -1,0 +1,37 @@
+@startuml
+class DataSetAgent {
+  -classificationAgent: AID
+  -analysisTechnique: String
+  -optimizationTechnique: String
+  -x: double[]
+  -y: double[]
+  +setup(): void
+  +takeDown(): void
+  -buscarAgente(serviceType: String): AID
+  -enviarDataset(receiver: AID, x: double[], y: double[]): void
+  -enviarDatosAlAgente(agentAID: AID, optimizationTechnique: String, x: double[], y: double[]): void
+}
+
+class Agent {
+  +setup(): void
+  +takeDown(): void
+}
+
+class Behaviour {
+  +action(): void
+  +done(): boolean
+}
+
+class SequentialBehaviour {
+  +addSubBehaviour(b: Behaviour): void
+}
+
+class TickerBehaviour {
+  +onTick(): void
+}
+
+DataSetAgent --|> Agent
+DataSetAgent::RecibirClasificacion --|> Behaviour
+SequentialBehaviour --|> Behaviour
+TickerBehaviour --|> Behaviour
+@enduml

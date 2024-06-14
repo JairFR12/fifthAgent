@@ -1,0 +1,26 @@
+@startuml
+class RegresionMultiple {
+  -xData: double[][]
+  -yData: double[]
+  -coefficients: double[]
+  +fit(): void
+  +printRegEquation(): void
+  +predict(x: double[]): void
+  -transpose(matrix: double[][]): double[][]
+  -multiplyMatrices(a: double[][], b: double[][]): double[][]
+  -multiplyMatrixVector(a: double[][], b: double[]): double[]
+  -invertMatrix(matrix: double[][]): double[][]
+}
+
+class Agent {
+  +setup(): void
+  +takeDown(): void
+}
+
+class CyclicBehaviour {
+  +action(): void
+}
+
+RegresionMultiple --|> Agent
+RegresionMultiple::ReceiveDataSet --|> CyclicBehaviour
+@enduml

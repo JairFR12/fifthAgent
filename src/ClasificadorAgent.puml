@@ -1,0 +1,51 @@
+@startuml
+
+class Agent {
+  + getLocalName(): String
+  + send(ACLMessage): void
+  + addBehaviour(Behaviour): void
+}
+
+class Clasificador extends Agent {
+  <<composite>>
+  + ReceiveModelVariables
+}
+
+class Behaviour {
+  + action(): void
+}
+
+class ReceiveModelVariables extends Behaviour  {
+  - mt: MessageTemplate
+
+  + determinarTecnicaAnalisis(List<Double>, List<Double>): String
+  + calcularCorrelacion(List<Double>, List<Double>): double
+  + determinarTecnicaOptimizacion(List<Double>, List<Double>): String
+  + enviarDatosAlAgente(String, String, List<Double>, List<Double>): void
+  + buscarAgente(String): AID
+}
+
+class DFAgentDescription {
+  + addServices(ServiceDescription): void
+}
+
+class ServiceDescription {
+  + setType(String): void
+}
+
+class ACLMessage {
+  + addReceiver(AID): void
+  + setConversationId(String): void
+  + setContent(String): void
+  + createReply(): ACLMessage
+
+  + REQUEST: int (constant)
+  + INFORM: int (constant)
+}
+
+AID <|-- Agent
+
+Clasificador <|-- Behaviour
+
+@enduml
+
